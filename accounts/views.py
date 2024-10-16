@@ -41,10 +41,16 @@ def registerUser(request):
             user.set_password(password)
             user.role=User.CUSTOMER
             user.save()
-            send_verification_email(request,user)
+            #send_verification_email(request,user)
             
             #it is used to send a verification email it function mainly presnet in utils.py
-            send_verification_email(request,user)
+
+            # Define mail_subject and email_template
+            mail_subject = "Verify Your Account"
+            email_template = "accounts/emails/account_verification_email.html"
+
+            
+            send_verification_email(request,user,mail_subject,email_template)
             messages.success(request,'User created successfully')
             return redirect('registerUser')
         else:
